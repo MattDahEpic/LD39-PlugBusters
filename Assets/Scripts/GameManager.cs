@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     public int maxCords = 8;
+    public PlayerControl player;
 
-    public GameObject[] tenants;
+    public PowerNeeder[] powerNeeders;
 
     [HideInInspector] public int currentCords;
     [HideInInspector] public int score;
+
+    public static GameManager instance {
+        get {
+            return Camera.main.GetComponent<GameManager>();
+        }
+    }
 
     void Start () {
         currentCords = maxCords;
