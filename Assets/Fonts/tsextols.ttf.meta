@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 48d12e8945ffc3a4e897f30fa343eff1
+timeCreated: 1501523902
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Typesource Extol S BRK
+  fontNames:
+  - Typesource Extol S BRK
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

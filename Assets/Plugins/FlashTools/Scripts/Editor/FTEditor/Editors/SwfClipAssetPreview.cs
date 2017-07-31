@@ -184,7 +184,7 @@ namespace FTEditor.Editors {
 							_matPropBlock.SetTexture("_AlphaTex", Texture2D.whiteTexture);
 							_matPropBlock.SetFloat("_ExternalAlpha", 0.0f);
 						}
-						ConfigureCameraForSequence(_previewUtils.m_Camera, targetSequence);
+						ConfigureCameraForSequence(_previewUtils.camera, targetSequence);
 						var frame = targetFrame;
 						for ( var i = 0; i < frame.Materials.Length; ++i ) {
 							_previewUtils.DrawMesh(
@@ -194,7 +194,7 @@ namespace FTEditor.Editors {
 								i,
 								_matPropBlock);
 						}
-						_previewUtils.m_Camera.Render();
+						_previewUtils.camera.Render();
 					}
 					_previewUtils.EndAndDrawPreview(r);
 				}

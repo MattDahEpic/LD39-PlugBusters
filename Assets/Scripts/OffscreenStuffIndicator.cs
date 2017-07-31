@@ -8,7 +8,7 @@ public class OffscreenStuffIndicator : MonoBehaviour {
     private Dictionary<PowerNeeder, Image> currentDisplays = new Dictionary<PowerNeeder, Image>();
 	
 	void Update () {
-		foreach (PowerNeeder p in GameManager.instance.powerNeeders) {
+		/*foreach (PowerNeeder p in GameManager.instance.powerNeeders) {
             if (p.wantsConnection) {
                 Vector3 screenPos = Camera.main.WorldToViewportPoint(p.transform.position);
                 if (screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1) { //is on screen
@@ -83,6 +83,6 @@ public class OffscreenStuffIndicator : MonoBehaviour {
                     //arrowRect.Rotate(Vector3.forward, -angle);
                 }
             }
-        }
+        }*/
 	}
 }

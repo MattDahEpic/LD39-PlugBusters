@@ -17,12 +17,6 @@ public class PlayerControl : MonoBehaviour {
     [HideInInspector] public SwfClipController anim;
     private Rigidbody2D body;
 
-    private bool isPlayingSpecialAnim {
-        get {
-            return anim.loopMode == SwfClipController.LoopModes.Once;
-        }
-    }
-
 	void Awake() {
         anim = GetComponent<SwfClipController>();
         anim.OnStopPlayingEvent += (SwfClipController c) => {
@@ -38,19 +32,19 @@ public class PlayerControl : MonoBehaviour {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
-		if(Input.GetButtonDown("Jump") && grounded && !isPlayingSpecialAnim) jump = true;
+		if(Input.GetButtonDown("Jump") && grounded) jump = true;
 
         //ANIMATIONS!
         if (anim.loopMode == SwfClipController.LoopModes.Loop) { //is not playing a special animation
-            if (body.velocity.y > 0) { //jumping
+            if (body.velocity.y > 2f && !grounded) { //jumping
                 anim.PlayIfNotAlreadyPlaying(hasPlug ? "player-jumpplug" : "player-jump");
                 return;
             }
-            if (body.velocity.y < 0) { //falling
+            if (body.velocity.y < -2f && !grounded) { //falling
                 anim.PlayIfNotAlreadyPlaying(hasPlug ? "player-fallplug" : "player-fall");
                 return;
             }
-            if (body.velocity.x != 0) { //moving
+            if (body.velocity.x > 2f || body.velocity.x < -2f) { //moving
                 anim.PlayIfNotAlreadyPlaying(hasPlug ? "player-walkplug" : "player-walk");
             } else {
                 anim.PlayIfNotAlreadyPlaying(hasPlug ? "player-idleplug" : "player-idle");
@@ -60,8 +54,10 @@ public class PlayerControl : MonoBehaviour {
 
 
 	void FixedUpdate () {
-		// Cache the horizontal input.
-		float h = isPlayingSpecialAnim ? 0 : Input.GetAxis("Horizontal");
+        Physics2D.IgnoreLayerCollision(8, 9, body.velocity.y > 0);
+
+        // Cache the horizontal input.
+        float h = Input.GetAxis("Horizontal");
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
 		if(h * body.velocity.x < maxSpeed)
@@ -85,8 +81,8 @@ public class PlayerControl : MonoBehaviour {
 			//TODO anim.SetTrigger("Jump");
 
 			// Play a random jump audio clip.
-			int i = Random.Range(0, jumpClips.Length);
-			AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
+			//int i = Random.Range(0, jumpClips.Length);
+			//AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
 
 			// Add a vertical force to the player.
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
