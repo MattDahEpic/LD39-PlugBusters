@@ -14,6 +14,8 @@ public class Menu : MonoBehaviour {
         if (load.progress == 0.9f) {
             prompt.text = "Press any key to begin!";
             if (Input.anyKeyDown) {
+                GameManager.score = 0;
+                GameManager.dissatisfaction = 0;
                 load.allowSceneActivation = true;
             }
         } else {
